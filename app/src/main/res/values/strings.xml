@@ -1,0 +1,12 @@
+<resources>
+
+    <string name="app_name">Roshambo</string>
+    <string name="lost_text">Oh! You Lost :(</string>
+    <string name="won_text">You Won! Yeah! :)</string>
+    <string name="draw_text">OOPS! It\'s a Tie! :P</string>
+    <string name="please_choose_text">Please Choose Your Option! All The Best! :)</string>
+    <string name="choose_rock_txt">Choose Rock</string>
+    <string name="choose_paper_txt">Choose Paper</string>
+    <string name="choose_scissors_txt">Choose Scissors</string>
+
+</resources>
