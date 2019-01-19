@@ -16,6 +16,11 @@ public class RoshamboUtilsTest {
     }
 
     @Test
+    public void testSelectRandomImageIdP2() {
+        assertTrue(RoshamboUtils.selectRandomImageId(5) <= 4);
+    }
+
+    @Test
     public void testSelectRandomImageIdN1() {
         assertFalse(RoshamboUtils.selectRandomImageId(3) > 2);
     }
@@ -23,6 +28,16 @@ public class RoshamboUtilsTest {
     @Test
     public void testSelectRandomImageIdN2() {
         assertFalse(RoshamboUtils.selectRandomImageId(3) < 0);
+    }
+
+    @Test
+    public void testSelectRandomImageIdN3() {
+        assertFalse(RoshamboUtils.selectRandomImageId(5) > 4);
+    }
+
+    @Test
+    public void testSelectRandomImageIdN4() {
+        assertFalse(RoshamboUtils.selectRandomImageId(5) < 0);
     }
 
 }

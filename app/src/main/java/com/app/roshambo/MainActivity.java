@@ -2,10 +2,12 @@ package com.app.roshambo;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Toast;
 import android.databinding.DataBindingUtil;
 import com.app.roshambo.databinding.ActivityMainBinding;
 
+import com.app.roshambo.utils.RoshamboUtils;
 import com.squareup.picasso.Picasso;
 
 public class MainActivity extends AppCompatActivity implements MainContract {
@@ -15,10 +17,9 @@ public class MainActivity extends AppCompatActivity implements MainContract {
             R.mipmap.paper,
             R.mipmap.scissors
     };
-    int userinput = 0;
 
-    ActivityMainBinding binding;
-    MainActivityPresenter presenter;
+    private ActivityMainBinding binding;
+    private MainActivityPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,39 +30,16 @@ public class MainActivity extends AppCompatActivity implements MainContract {
         binding.setPresenter(presenter);
     }
 
-    public void updateUI(int input, int output, int userSelected) {
-        userinput = userSelected;
-        Picasso.get().load(input).into(binding.ivInput);
+    public void updateUI(int input, int output, int result) {
+        Picasso.get().load(images[input]).into(binding.ivInput);
         Picasso.get().load(images[output]).into(binding.ivOutput);
-        checkresult(output);
-    }
-
-    private void checkresult(int imageId) {
-        if (userinput == 0 && imageId == 0) {     //User choose Rock,Computer choose Rock
-            showresult(2);
-        } else if (userinput == 0 && imageId == 1) { //User choose Rock,Computer choose Paper
-            showresult(0);
-        } else if (userinput == 0 && imageId == 2) { //User choose Rock,Computer choose Scissors
-            showresult(1);
-        } else if (userinput == 1 && imageId == 0) { //User choose Paper,Computer choose Rock
-            showresult(1);
-        } else if (userinput == 1 && imageId == 1) { //User choose Paper,Computer choose Paper
-            showresult(2);
-        } else if (userinput == 1 && imageId == 2) { //User choose Paper,Computer choose Scissors
-            showresult(0);
-        } else if (userinput == 2 && imageId == 0) {//User choose Scissors,Computer choose Rock
-            showresult(0);
-        } else if (userinput == 2 && imageId == 1) { //User choose Scissors,Computer choose Paper
-            showresult(1);
-        } else if (userinput == 2 && imageId == 2) { //User choose Scissors,Computer choose Scissors
-            showresult(2);
-        }
+        showresult(result);
     }
 
     private void showresult(int result) {
-        if (result == 0) {
+        if (result == RoshamboUtils.RESULT_LOST) {
             Toast.makeText(getApplicationContext(), R.string.lost_text, Toast.LENGTH_SHORT).show();
-        } else if (result == 1)
+        } else if (result == RoshamboUtils.RESULT_WON)
             Toast.makeText(getApplicationContext(), R.string.won_text, Toast.LENGTH_SHORT).show();
         else
             Toast.makeText(getApplicationContext(), R.string.draw_text, Toast.LENGTH_SHORT).show();
